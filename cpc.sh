@@ -42,6 +42,7 @@ if [ $# != 3 ]; then
 	# error message
 	echo "Error: Incorrect number of arguments"
 	echo $usage
+	exit
 else
 	# store given arguments
 	options=$1
