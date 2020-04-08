@@ -4,6 +4,8 @@
 # script name: cpc
 # Written by: Nathan Byrne & Jack Faulkner
 
+# function checks if a directory exists
+# pass directory path as parameter
 dirExists(){
 	if [ ! -d "$1" ]; then
 		echo false
@@ -12,11 +14,15 @@ dirExists(){
 	fi
 }
 
+# functions attempts to create directory and lets user know if it was successful
+# pass directory path as parameter
 createDir(){
+	# check if user has passed a parameter
 	if [ $# = 1 ]; then
+		# make the directory
 		mkdir $1
-		dirExist=`dirExists $1`
 		# Check made to make sure directory was created successfully
+		dirExist=`dirExists $1`
 		if [ $dirExist = true ]; then
 			# return true if dir made
 			echo true
@@ -71,23 +77,23 @@ else
 			while [ true ]; do
 				read -p "Would you like to create the directory: \"$trgtDir\" [Y/N]" yn
 				case $yn in
-					# Directory gets created if user selects "yes"
+					# Directory gets created if user inputs "y"
 					[Yy]* )
 						dirExists=`createDir $trgtDir`
 						# Check made to make sure directory was created successfully
 						if [ $dirExists = true ]; then
 							echo "Directory created successfully"
 						else
-							echo "Directory could not be created"
+							echo "Error: directory could not be created"
+							echo $usage
 							exit
 						fi
 						break;;
-					# Directory doesnt get created if user selects "no"
+					# Directory doesnt get created if user inputs "n"
 					[Nn]* ) 
 						echo "Error: directory not created";
 						echo $usage
-						exit; 
-						break;;
+						exit;;
 					# User gets prompted to input correct key if wrong input is selected
 					* ) echo "Please answer using y/n";;
 				esac
@@ -95,27 +101,29 @@ else
 
 		else
 			# Notifies user if the target directory already exists
-			echo "directory exists"
-			dirExists=true
+			echo "Directory exists"
 		fi
 
 		
 	fi
 fi
 
-# carries out operation based on option
+# the following if statements carry out the relevant operation based on option selected
+
+# executes if option is "-c"
 if [ $options = "-c" ]; then
+	# prompt user if they want to continue copying file
 	while [ true ]; do
-		read -p "You want to copy file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
+		read -p "Are you sure you want to copy file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 		case $yn in
 			# File gets copied if user selects "yes"
 			[Yy]* )
 				cp $srcFile $trgtDir
-				echo "file copied"
+				echo "File copied"
 				break;;
 			# File doesnt get copied if user selects "no"
 			[Nn]* ) 
-				echo "file not copied"
+				echo "File not copied"
 				exit;;
 			* ) echo "Please answer using y/n";;
 		esac
@@ -129,42 +137,37 @@ else
 	if [ $extension = "gz" ]; then
 		echo "-- Unzipping --"
 		while [ true ]; do
-			read -p "You want to unzip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
+			read -p "Are you sure you want to unzip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 			case $yn in
 				# File gets copied if user selects "yes"
 				[Yy]* )
 					gunzip $srcFile
 					new=${srcFile%.gz}
-					echo $new
 					mv $new $trgtDir
-					echo "file unzipped and copied"
-					ls $trgtDir
+					echo "File unzipped and moved"
 					break;;
 				# File doesnt get copied if user selects "no"
 				[Nn]* ) 
-					echo "zipping cancelled"
+					echo "Unzipping cancelled"
 					exit;;
 				* ) echo "Please answer using y/n";;
 			esac
 		done
-		
-		
 	else
 		echo "-- Zipping --"
 		while [ true ]; do
-			read -p "You want to zip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
+			read -p "Are you sure you want to zip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 			case $yn in
 				# File gets zipped & moved if user selects "yes"
 				[Yy]* )
 					gzip $srcFile
 					new="$srcFile.gz"
 					mv $new $trgtDir
-					echo "file zipped and copied"
-					ls $trgtDir
+					echo "File zipped and moved"
 					break;;
 				# Zipping is cancelled if user selects "no"
 				[Nn]* ) 
-					echo "zipping cancelled"
+					echo "Zipping cancelled"
 					exit;;
 				* ) echo "Please answer using y/n";;
 			esac
