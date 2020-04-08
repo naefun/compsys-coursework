@@ -71,7 +71,7 @@ else
 			while [ true ]; do
 				read -p "Would you like to create the directory: \"$trgtDir\" [Y/N]" yn
 				case $yn in
-					# Directory gets created if user selects yes
+					# Directory gets created if user selects "yes"
 					[Yy]* )
 						dirExists=`createDir $trgtDir`
 						# Check made to make sure directory was created successfully
@@ -82,7 +82,7 @@ else
 							exit
 						fi
 						break;;
-					# Directory doesnt get created if user selects no
+					# Directory doesnt get created if user selects "no"
 					[Nn]* ) 
 						echo "Error: directory not created";
 						echo $usage
@@ -108,12 +108,12 @@ if [ $options = "-c" ]; then
 	while [ true ]; do
 		read -p "You want to copy file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 		case $yn in
-			# File gets copied if user selects yes
+			# File gets copied if user selects "yes"
 			[Yy]* )
 				cp $srcFile $trgtDir
 				echo "file copied"
 				break;;
-			# File doesnt get copied if user selects no
+			# File doesnt get copied if user selects "no"
 			[Nn]* ) 
 				echo "file not copied"
 				exit;;
@@ -131,7 +131,7 @@ else
 		while [ true ]; do
 			read -p "You want to unzip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 			case $yn in
-				# File gets copied if user selects yes
+				# File gets copied if user selects "yes"
 				[Yy]* )
 					gunzip $srcFile
 					new=${srcFile%.gz}
@@ -140,7 +140,7 @@ else
 					echo "file unzipped and copied"
 					ls $trgtDir
 					break;;
-				# File doesnt get copied if user selects no
+				# File doesnt get copied if user selects "no"
 				[Nn]* ) 
 					echo "zipping cancelled"
 					exit;;
@@ -154,7 +154,7 @@ else
 		while [ true ]; do
 			read -p "You want to zip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 			case $yn in
-				# File gets copied if user selects yes
+				# File gets zipped & moved if user selects "yes"
 				[Yy]* )
 					gzip $srcFile
 					new="$srcFile.gz"
@@ -162,7 +162,7 @@ else
 					echo "file zipped and copied"
 					ls $trgtDir
 					break;;
-				# File doesnt get copied if user selects no
+				# Zipping is cancelled if user selects "no"
 				[Nn]* ) 
 					echo "zipping cancelled"
 					exit;;
