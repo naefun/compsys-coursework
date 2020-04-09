@@ -134,25 +134,27 @@ else
 	f="$(basename -- $srcFile)"
 	extension=${f##*.}
 	
+	# check if file is already zipped
 	if [ $extension = "gz" ]; then
 		echo "-- Unzipping --"
 		while [ true ]; do
 			read -p "Are you sure you want to unzip and move file \"$srcFile\" to directory \"$trgtDir\" [Y/N]" yn
 			case $yn in
-				# File gets copied if user selects "yes"
+				# File gets unzipped & moved if user selects "yes"
 				[Yy]* )
 					gunzip $srcFile
 					new=${srcFile%.gz}
 					mv $new $trgtDir
 					echo "File unzipped and moved"
 					break;;
-				# File doesnt get copied if user selects "no"
+				# File doesnt get unzipped & moved if user selects "no"
 				[Nn]* ) 
 					echo "Unzipping cancelled"
 					exit;;
 				* ) echo "Please answer using y/n";;
 			esac
 		done
+	# else executes if file is not already zipped
 	else
 		echo "-- Zipping --"
 		while [ true ]; do
