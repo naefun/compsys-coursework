@@ -1,7 +1,7 @@
 # !/bin/bash
 # This script takes in two integer arguments and prints even numbers and a message depending on what it is divisible by.
 # script name: evenfruit.sh
-# Authors: Nathan Byrne & Jack Faulkner
+# Authors: Nathan Byrne (190051783) & Jack Faulkner (190051808)
 
 # Function prompts user for input and checks that it is an integer
 getNum(){
@@ -9,7 +9,7 @@ getNum(){
 	re='^[0-9]+$'
 	
 	read -p "Please enter an integer: " num1 leftover
-	# While loop checks if input is a number, if not then it will ask for input again
+	# While loop checks input against regular expression to ensure it is a number, if not then it will ask for input again
 	while ! [[ $num1 =~ $re ]]; do
 		read -p "Please enter an integer: " num1 leftover
 	done
