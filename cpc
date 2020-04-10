@@ -1,8 +1,8 @@
 # !/bin/bash
-# Description: This script can zip and backup files for the user.
+# Description: This script can zip/unzip and backup files for the user.
 # Command usage: cpc <options> <source-file> <target-directory>
-# script name: cpc
-# Written by: Nathan Byrne & Jack Faulkner
+# Script name: cpc
+# Authors: Nathan Byrne (190051783) & Jack Faulkner (190051808)
 
 # function checks if a directory exists
 # pass directory path as parameter
