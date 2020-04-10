@@ -1,5 +1,6 @@
 # !/bin/bash
-# This script takes in two integer arguments and prints even numbers and a message depending on what it is divisible by.
+# Description: This script takes in two integer arguments and prints even numbers and a message depending on what it is divisible by.
+# Command usage: evenfruit.sh <first number> <second number>
 # script name: evenfruit.sh
 # Authors: Nathan Byrne (190051783) & Jack Faulkner (190051808)
 
